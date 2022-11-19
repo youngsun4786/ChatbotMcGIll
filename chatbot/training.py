@@ -5,6 +5,11 @@ import pickle
 import numpy as np
 import random
 
+import torch
+import torch.nn as nn
+from torch.utils.data import Dataset, DataLoader
+from model import NeuralNet
+
 # #tensor flow and keras
 # from tensorflow import keras
 # from keras.models import Sequential
@@ -61,6 +66,74 @@ for (word_list, tag) in documents:
 
 X_train = np.array(X_train)
 y_train = np.array(y_train)
-# testing
-print(X_train)
-print(y_train)
+
+
+class ChatDataSet(Dataset):
+    def __init__(self):
+        self.N = len(X_train)
+        self.X_data = X_train
+        self.y_data = y_train
+
+    def __getitem__(self, index):
+        return self.X_data[index], self.y_data[index]
+
+    # returns sample size
+    def __len__(self):
+        return self.N
+
+
+# hyperparameters
+batch_size = 8
+hidden_size = 8
+input_size = len(X_train[0])
+output_size = len(classes)
+
+print(input_size, len(all_words))
+print(output_size, classes)
+num_epochs = 1000
+
+
+dataset = ChatDataSet()
+train_loader = DataLoader(
+    dataset=dataset, batch_size=batch_size, shuffle=True, num_workers=0)
+
+device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+model = model = NeuralNet(input_size, hidden_size, output_size).to(device)
+
+# loss and optimizer
+criterion = nn.CrossEntropyLoss()
+optimizer = torch.optim.Adam(model.parameters(), lr=0.001)
+
+for epoch in range(num_epochs):
+    for (words, labels) in train_loader:
+        words = words.to(device)
+        labels = labels.to(device)
+
+        # forward
+        outputs = model(words)
+        loss = criterion(outputs, labels)
+
+        # backward and optimizer step
+        optimizer.zero_grad()
+        loss.backward()
+        optimizer.step()
+
+        # print loss
+        if (epoch + 1) % 100 == 0:
+            print(f'epoch {epoch+1}/{(num_epochs)}, loss = {loss.item(): .4f}')
+
+print(f'final loss, loss ={loss.item(): .4f}')
+
+
+data = {
+    "model_state": model.state_dict(),
+    "input_size": input_size,
+    "output_size": output_size,
+    "hidden_size": hidden_size,
+    "all_words": all_words,
+    "classes": classes,
+}
+
+FILE = "data.pth"
+torch.save(data, FILE)
+print(f'training complete. File saved to {FILE}')
