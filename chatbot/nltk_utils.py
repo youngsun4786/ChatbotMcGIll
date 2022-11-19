@@ -1,9 +1,8 @@
 # natural language tool kit
 import nltk 
-from nltk.stem import WordNetLemmatizer
 
 #stemmer function 
-lemmatizer = WordNetLemmatizer()
+lemmatizer = nltk.stem.WordNetLemmatizer()
 import numpy as np
 
 # tokenizer for training : splits up a sentence into separate words

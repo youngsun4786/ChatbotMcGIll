@@ -1,6 +1,7 @@
 import random 
 import json
 import torch
+import random as rd
 from model import NeuralNet
 from nltk_utils import bag_of_words, tokenize
 
@@ -21,8 +22,24 @@ model = NeuralNet(input_size, hidden_size, output_size).to(device)
 model.load_state_dict(model_state)
 model.eval()
 
-bot_name = "NAAS"
 
+# in case the model does not understand any given strings to corpus.
+def rand_response(): 
+    rand_list=[
+        "Please try writing something more descriptive.",
+        "Oh! It appears you wrote something I don't understand yet",
+        "Do you mind trying to rephrase that?",
+        "I'm terribly sorry, I didn't quite catch that.",
+        "I can't answer that yet, please try asking something else.",
+        "I do not understand...",
+        "Beg your pardon?"
+    ]
+
+    rand_item = rd.randrange(len(rand_list))
+    return rand_list[rand_item]
+
+
+bot_name = "N.A.A.S"
 
 def get_response(msg):
     sentence = tokenize(msg)
@@ -42,7 +59,7 @@ def get_response(msg):
             if tag == intent["tag"]:
                 return random.choice(intent['responses'])
     
-    return "I do not understand..."
+    return rand_response()
 
 
 if __name__ == "__main__":

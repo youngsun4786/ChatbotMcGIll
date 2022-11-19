@@ -34,7 +34,7 @@
          "context_set": ""
         },
         {"tag": "mental health",
-        "patterns": ["Where can I look for mental health?", "wellness", "support group", "counselling", "mental illness"],
+        "patterns": ["mental health?", "wellness", "support group", "counselling", "mental illness"],
         "responses": ["Click on this website to access mental health resources: <a href='https://myssp.app/ca/home'>My SSP</a>", 
         "Click on this link to access mental health resources: <a href='https://www.mcgill.ca/hr/benefits/health-well-being/resources/mental-health'>Mental Health | Human Resources</a>", 
         "Click on this link to access mental health resources: <a href='https://ssmu.ca/resources/mental-health/'>Mental Health - SSMU</a>", 
@@ -45,12 +45,12 @@
         "context_set": ""
         },
         {"tag": "advising",
-        "patterns": ["where can I look for advising?", "Where I can search for advisor"],
+        "patterns": ["advising?", "advisor"],
         "responses": ["Here is a link to the advisor directory: <a href='https://www.mcgill.ca/students/advising/advisordirectory]'>Advisor Directory</a>"],
         "context_set": ""
         },   
         {"tag": "library",
-        "patterns": ["library", "books", "Redpath Library", "McLennan Library", "Birks Reading Room", "Islamic Studies Library", "Education Curriculum Resources Centre", "Macdonald Campus Library", "Marvin Duchow Music Library", "Nahum Gelber Law Library", "Osler Library of the History of Medicine", "ROAAr Reading Room"],
+        "patterns": ["library", "books", "Redpath", "McLennan", "Birks Reading Room", "Islamic Studies Library", "Education Curriculum Resources Centre", "Macdonald Campus Library", "Marvin Duchow Music Library", "Nahum Gelber Law Library", "Osler Library of the History of Medicine", "ROAAr Reading Room"],
         "responses": ["Here is a link to all the McGill libraries: <a href='https://www.mcgill.ca/library/branches'>McGill Libraries</a>", 
         "Click on this link to access more information about Redpath library: <a href='https://www.mcgill.ca/library/branches/hssl'>Redpath Library</a>",
         "Click on this link to access more information about McLennan library: <a href='https://www.mcgill.ca/library/branches/hssl'>McLennan Library</a>",
@@ -65,7 +65,7 @@
         "context_set": ""
         },   
         {"tag": "club",
-        "patterns": ["Where I can find clubs?", "where should I look for student groups?"],
+        "patterns": ["clubs?", "student groups?"],
         "responses": ["Here is a link to the list of clubs: <a href='https://ssmu.ca/student-life/clubs-services-isg/'>Clubs, Services and ISGs</a>"],
         "context_set": ""
         }

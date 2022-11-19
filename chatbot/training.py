@@ -21,7 +21,7 @@ intents = json.loads(open('/Users/nick/Desktop/Codejam/ChatbotMcGIll/chatbot/int
 
 all_words = []
 classes = []
-documents = []
+xy = []
 ignore_letters = ['?', '!', '.', ',']
 
 
@@ -30,10 +30,10 @@ ignore_letters = ['?', '!', '.', ',']
 
 for intent in intents['intents']:
     for pattern in intent['patterns']:
-        word_list = tokenize(pattern)
+        tk_word_list = tokenize(pattern)
         # do not want to make 2d arrays -> hence, extend
-        all_words.extend(word_list)
-        documents.append((word_list, intent['tag']) )
+        all_words.extend(tk_word_list)
+        xy.append((tk_word_list, intent['tag']) )
 
         # create an array for tags (label)
         if intent['tag'] not in classes:
@@ -42,10 +42,10 @@ for intent in intents['intents']:
 all_words = [lemmatize(word) for word in all_words if word not in ignore_letters] 
 
 # get rid of duplicates
-all_words = sorted(set(all_words)) # X (input)
-classes = sorted(set(classes)) # y (label)
+all_words = sorted(set(all_words))
+classes = sorted(set(classes)) 
 
-# create pickle
+# create pickle for the words
 pickle.dump(all_words, open('words.pkl', 'wb'))
 pickle.dump(classes, open('classes.pkl', 'wb'))
 
@@ -53,15 +53,17 @@ X_train = []
 y_train = []
 
 # we need the actual dataset to be numerical 
-# so they need to be vectorized in BagOfWords
-for (word_list, tag) in documents:
-    bow = bag_of_words(word_list, all_words)
+# so they need to be vectorized in BagOfWords - preprocessing part
+for (tk_word_list, tag) in xy:
+    bow = bag_of_words(tk_word_list, all_words)
     X_train.append(bow)
 
+    y_i = np.zeros(len(classes))
     # locate the index of tag
     label = classes.index(tag)
     y_train.append(label)
 
+# turn this into np array
 X_train = np.array(X_train)
 y_train = np.array(y_train)
 
