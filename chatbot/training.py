@@ -17,7 +17,8 @@ from model import NeuralNet
 # from keras.optimizers import SGD
 
 # load the dataset (intents)
-intents = json.loads(open('/Users/nick/Desktop/Codejam/ChatbotMcGIll/chatbot/intents.json').read())
+intents = json.loads(
+    open('/Users/nick/Desktop/Codejam/ChatbotMcGIll/chatbot/intents.json').read())
 
 all_words = []
 classes = []
@@ -33,17 +34,18 @@ for intent in intents['intents']:
         word_list = tokenize(pattern)
         # do not want to make 2d arrays -> hence, extend
         all_words.extend(word_list)
-        documents.append((word_list, intent['tag']) )
+        documents.append((word_list, intent['tag']))
 
         # create an array for tags (label)
         if intent['tag'] not in classes:
             classes.append(intent['tag'])
 
-all_words = [lemmatize(word) for word in all_words if word not in ignore_letters] 
+all_words = [lemmatize(word)
+             for word in all_words if word not in ignore_letters]
 
 # get rid of duplicates
-all_words = sorted(set(all_words)) # X (input)
-classes = sorted(set(classes)) # y (label)
+all_words = sorted(set(all_words))  # X (input)
+classes = sorted(set(classes))  # y (label)
 
 # create pickle
 pickle.dump(all_words, open('words.pkl', 'wb'))
@@ -52,7 +54,7 @@ pickle.dump(classes, open('classes.pkl', 'wb'))
 X_train = []
 y_train = []
 
-# we need the actual dataset to be numerical 
+# we need the actual dataset to be numerical
 # so they need to be vectorized in BagOfWords
 for (word_list, tag) in documents:
     bow = bag_of_words(word_list, all_words)
@@ -64,6 +66,7 @@ for (word_list, tag) in documents:
 
 X_train = np.array(X_train)
 y_train = np.array(y_train)
+
 
 class ChatDataSet(Dataset):
     def __init__(self):
@@ -79,7 +82,7 @@ class ChatDataSet(Dataset):
         return self.N
 
 
-#hyperparameters
+# hyperparameters
 batch_size = 8
 hidden_size = 8
 input_size = len(X_train[0])
@@ -91,14 +94,15 @@ num_epochs = 1000
 
 
 dataset = ChatDataSet()
-train_loader = DataLoader(dataset=dataset, batch_size=batch_size, shuffle=True, num_workers=0)
+train_loader = DataLoader(
+    dataset=dataset, batch_size=batch_size, shuffle=True, num_workers=0)
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 model = model = NeuralNet(input_size, hidden_size, output_size).to(device)
 
 # loss and optimizer
 criterion = nn.CrossEntropyLoss()
-optimizer = torch.optim.Adam(model.parameters(), lr = 0.001)
+optimizer = torch.optim.Adam(model.parameters(), lr=0.001)
 
 for epoch in range(num_epochs):
     for (words, labels) in train_loader:
@@ -109,26 +113,25 @@ for epoch in range(num_epochs):
         outputs = model(words)
         loss = criterion(outputs, labels)
 
-
         # backward and optimizer step
         optimizer.zero_grad()
         loss.backward()
         optimizer.step()
 
         # print loss
-        if (epoch +1) % 100 == 0:
+        if (epoch + 1) % 100 == 0:
             print(f'epoch {epoch+1}/{(num_epochs)}, loss = {loss.item(): .4f}')
 
-print(f'final loss, loss ={loss.item(): .4f}') 
+print(f'final loss, loss ={loss.item(): .4f}')
 
 
 data = {
-    "model_state" : model.state_dict(),
-    "input_size" : input_size,
+    "model_state": model.state_dict(),
+    "input_size": input_size,
     "output_size": output_size,
     "hidden_size": hidden_size,
-    "all_words" : all_words,
-    "classes" : classes,
+    "all_words": all_words,
+    "classes": classes,
 }
 
 FILE = "data.pth"
