@@ -44,7 +44,7 @@ def rand_response():
 bot_name = "N.A.A.S"
 
 # helper that retrieves and process message from user
-def get_response(msg):
+def response_from_user(msg):
     tk_sentence = tokenize(msg)
     X = bag_of_words(tk_sentence, all_words)
     X = X.reshape(1, X.shape[0])
@@ -71,6 +71,6 @@ if __name__ == "__main__":
         if sentence == "quit":
             break
 
-        resp = get_response(sentence)
+        resp = response_from_user(sentence)
         print(resp)
 
