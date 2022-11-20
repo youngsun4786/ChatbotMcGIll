@@ -48,6 +48,8 @@ class ChatDataSet(Dataset):
         self.batch_size = 8
         self.hidden_size = 8
         self.num_epochs = 700
+        self.input_size = len(X_train[0])
+        self.output_size = len(classes)
 
     def __getitem__(self, index):
         return self.X_data[index], self.y_data[index]
@@ -59,13 +61,6 @@ class ChatDataSet(Dataset):
 
 # fitting the model
 
-# #hyperparameters
-input_size = len(X_train[0])
-output_size = len(classes)
-
-print(input_size, len(all_words))
-print(output_size, classes)
-
 # loading the dataset
 dataset_preprocessed = ChatDataSet()
 train_loader = DataLoader(dataset=dataset_preprocessed, batch_size=dataset_preprocessed.batch_size, shuffle=True, num_workers=0)
@@ -73,10 +68,10 @@ train_loader = DataLoader(dataset=dataset_preprocessed, batch_size=dataset_prepr
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
 #fit the dataset
-model = NN(input_size, dataset_preprocessed.hidden_size, output_size).to(device)
+model = NN(dataset_preprocessed.input_size, dataset_preprocessed.hidden_size, dataset_preprocessed.output_size).to(device)
 
 # loss and optimizer
-criterion = nn.CrossEntropyLoss() # CE Loss function
+loss_function = nn.CrossEntropyLoss() # CE Loss function
 optimizer = torch.optim.Adam(model.parameters(), lr = 0.001)
 loss_all  = []
 for epoch in range(dataset_preprocessed.num_epochs):
@@ -84,24 +79,25 @@ for epoch in range(dataset_preprocessed.num_epochs):
         # forward
         # fitting the dataset 
         y_pred = model(words)        
-        loss = criterion(y_pred, labels)
+        ls = loss_function(y_pred, labels)
         # backward and optimizer step
         optimizer.zero_grad()
-        loss.backward()
+        ls.backward()
         optimizer.step()
         # printing the entropy loss
         if (epoch +1) % 100 == 0:
-            loss_all.append(loss.item())
-            print(f'epoch {epoch+1}/{(dataset_preprocessed.num_epochs)}, loss = {loss.item(): .4f}')
+            loss_all.append(ls.item())
+            print(f'epoch {epoch+1}/{(dataset_preprocessed.num_epochs)}, loss = {ls.item(): .4f}')
 
-
+# save data as dict
 data = {
     "model_state" : model.state_dict(),
-    "input_size" : input_size,
-    "output_size": output_size,
-    "hidden_size": dataset_preprocessed.hidden_size,
     "all_words" : all_words,
     "classes" : classes,
+    "input_size" : dataset_preprocessed.input_size,
+    "output_size": dataset_preprocessed.output_size,
+    "hidden_size": dataset_preprocessed.hidden_size
 }
 
+# saving the data model
 torch.save(data, "data.pth")

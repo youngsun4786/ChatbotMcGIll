@@ -56,7 +56,7 @@ def get_response(msg):
     tag = classes[predicted_idx.item()]
     probs = torch.softmax(y_pred, dim=1)
     prob = probs[0][predicted_idx.item()]
-    if prob.item() > 0.75:
+    if prob.item() > 0.70:
         for intent in intents['intents']:
             if tag == intent["tag"]:
                 return random.choice(intent['responses'])

@@ -85,7 +85,7 @@ html {
     right: 30px;
 }
 
-/* CONTENT IS CLOSE */
+/* CONTENT CLOSED */
 .chatbox__support {
     display: flex;
     flex-direction: column;
@@ -97,7 +97,7 @@ html {
     transition: all .5s ease-in-out;
 }
 
-/* CONTENT ISOPEN */
+/* CONTENT OPENED */
 .chatbox--active {
     transform: translateY(-40px);
     z-index: 123456;
