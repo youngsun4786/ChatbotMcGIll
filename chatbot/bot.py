@@ -1,9 +1,12 @@
 import random 
 import json
+import pickle
 import torch
+import numpy as np
 import random as rd
-from model import NeuralNet
-from nltk_utils import bag_of_words, tokenize
+from model import NN
+from nltk_utils import bag_of_words, tokenize, lemmatize
+
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 intents = json.loads(open('/Users/nick/Desktop/Codejam/ChatbotMcGIll/chatbot/intents.json').read())
@@ -17,7 +20,7 @@ all_words = data['all_words']
 classes = data['classes']
 model_state = data['model_state']
 
-model = NeuralNet(input_size, hidden_size, output_size).to(device)
+model = NN(input_size, hidden_size, output_size).to(device)
 # knows our learned parameters
 model.load_state_dict(model_state)
 model.eval()
@@ -41,6 +44,7 @@ def rand_response():
 
 bot_name = "N.A.A.S"
 
+# helper that retrieves and process message from user
 def get_response(msg):
     sentence = tokenize(msg)
     X = bag_of_words(sentence, all_words)
@@ -63,7 +67,6 @@ def get_response(msg):
 
 
 if __name__ == "__main__":
-    print("Let's chat! (type 'quit' to exit)")
     while True:
         # sentence = "do you use credit cards?"
         sentence = input("You: ")
@@ -72,3 +75,4 @@ if __name__ == "__main__":
 
         resp = get_response(sentence)
         print(resp)
+

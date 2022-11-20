@@ -1,16 +1,16 @@
 {"intents": [
         {"tag": "greeting",
-         "patterns": ["Hi", "How are you", "Is anyone there?", "Hello", "Good day", "Whats up"],
-         "responses": ["Hello!", "Good to see you again!", "Hi there, how can I help?"],
+         "patterns": ["Hi", "How are you", "Is anyone there?", "Hello", "Good day", "Whats up", "Hey", "My name is"],
+         "responses": ["Hello!", "Good to see you again!", "Hi there, how can I help?", "Welcome to McGill FAQ Chatbot"],
          "context_set": ""
         },
         {"tag": "goodbye",
         "patterns": ["cya", "See you later", "Goodbye", "I am Leaving", "Have a Good day"],
-        "responses": ["Sad to see you go :(", "Talk to you later", "Goodbye!"],
+        "responses": ["Sad to see you go :(", "Talk to you later", "Goodbye!", "Please return with our service."],
         "context_set": ""
         },
         {"tag": "cafe",
-         "patterns": ["coffee", "coffee shop", "cafe", "drink"],
+         "patterns": ["feeling tired","coffee", "coffee shop", "cafe", "drink", "thirsty", "need to be caffeinated", "chill study spot", "chill study space"],
          "responses": ["Name: <a href='http://www.leaveshouse.com/'>LEAVES HOUSE</a> Location: 1800 Avenue McGill College RDC-A", 
          "Name: <a href='https://www.facebook.com/MiltonBcafeteriaurbaine/'></a> Milton B - Cafétéria urbaine Location: 3498 Park Ave", 
          "Name: <a href='http://shop.humblelion.com/'>Café Humble Lion (McGill College)</a> Location: 1204 McGill College Ave", 
@@ -25,7 +25,6 @@
          "Name: <a href='https://www.mcgill.ca/foodservices/locations/retail/vinhs-cafe'>Vinh's Cafe</a> Location: 740 Dr Penfield Ave", 
          "Name: <a href='http://www.mylittlecup.cafe/'>My Little Cup</a> Location: 2055 Blvd Robert-Bourassa", 
          "Name: <a href='http://structureroasters.com/'>Structure Roasters - Structure Torréfacteurs</a> Location: 460 McGill St", 
-         "Name: <a href='https://crewcollectivecafe.com/'>Crew Collective & Cafe</a> Location: 360 Rue Saint-Jacques", 
          "Name: <a href='https://cafevanhoutte.com/fr/trouver-un-cafe/?utm_source=G&utm_medium=LPM&utm_campaign=MTY'>Café Van Houtte</a> Location: 100 McGill St", 
          "Name: <a href='http://fraiscafe-cafe.business.site/'>frais cafe</a> Location: 1500 McGill College Ave", 
          "Name: <a href='http://pikoloespresso.com/'>Pikolo Espresso Bar</a> Location: 1635 Rue Clark", 
@@ -45,34 +44,69 @@
         "context_set": ""
         },
         {"tag": "advising",
-        "patterns": ["advising?", "advisor"],
+        "patterns": ["advising?", "advisor", "discuss course", "faculty advisor"],
         "responses": ["Here is a link to the advisor directory: <a href='https://www.mcgill.ca/students/advising/advisordirectory]'>Advisor Directory</a>"],
         "context_set": ""
         },   
         {"tag": "library",
-        "patterns": ["library", "books", "Redpath", "McLennan", "Birks Reading Room", "Islamic Studies Library", "Education Curriculum Resources Centre", "Macdonald Campus Library", "Marvin Duchow Music Library", "Nahum Gelber Law Library", "Osler Library of the History of Medicine", "ROAAr Reading Room"],
-        "responses": ["Here is a link to all the McGill libraries: <a href='https://www.mcgill.ca/library/branches'>McGill Libraries</a>", 
-        "Click on this link to access more information about Redpath library: <a href='https://www.mcgill.ca/library/branches/hssl'>Redpath Library</a>",
-        "Click on this link to access more information about McLennan library: <a href='https://www.mcgill.ca/library/branches/hssl'>McLennan Library</a>",
-        "Click on this link to access more information about Birks Reading Room: <a href='https://www.mcgill.ca/library/branches/birks'>Birks Reading Room</a>",
-        "Click on this link to access more information about Islamic Studies Library: <a href='https://www.mcgill.ca/library/branches/islamic'>Islamic Studies Library</a>",
-        "Click on this link to access more information about Education Curriculum Resources Centre: <a href='https://www.mcgill.ca/library/branches/education'>Education Curriculum Resources Centre</a>", 
-        "Click on this link to access more information about Macdonald Campus Library: <a href='https://www.mcgill.ca/library/branches/macdonald'>Macdonald Campus Library</a>",
-        "Click on this link to access more information about Marvin Duchow Music Library: <a href='https://www.mcgill.ca/library/branches/music'>Marvin Duchow Music Library</a>",
-        "Click on this link to access more information about Nahum Gelber Law Library: <a href='https://www.mcgill.ca/library/branches/law'>Nahum Gelber Law Library</a>",
-        "Click on this link to access more information about Osler Library of the History of Medicine: <a href='https://www.mcgill.ca/library/branches/osler'>Osler Library of the History of Medicine</a>",
-        "Click on this link to access more information about ROAAr Reading Room: <a href='https://www.mcgill.ca/library/branches/roaar/roaar-reading-room'>ROAAr Reading Room</a>"],
+        "patterns": ["library", "books", "textbooks", "quiet study space"],
+        "responses": ["Here is a link to all the McGill libraries: <a href='https://www.mcgill.ca/library/branches'>McGill Libraries</a>"],
         "context_set": ""
-        },   
+        }, 
+        {"tag": "redpath", 
+        "patterns": ["Redpath", "Redpath library"], 
+        "responses": ["Click on this link to access more information about Redpath library: <a href='https://www.mcgill.ca/library/branches/hssl'>Redpath Library</a>"], 
+        "context_set": ""
+        },
+        {"tag": "mclennan", 
+        "patterns": ["McLennan", "McLennan Library"], 
+        "responses": ["Click on this link to access more information about McLennan library: <a href='https://www.mcgill.ca/library/branches/hssl'>McLennan Library</a>"], 
+        "context_set": ""
+        },
+        {"tag": "birks", 
+        "patterns": ["Birks Reading Room", "Birks", "Birks Library"], 
+        "responses": ["Click on this link to access more information about Birks Reading Room: <a href='https://www.mcgill.ca/library/branches/birks'>Birks Reading Room</a>"], 
+        "context_set": ""
+        },
+        {"tag": "islamic studies", 
+        "patterns": ["Islamic Studies Library", "Islamic", "Islamic Stdudies"], 
+        "responses": ["Click on this link to access more information about Islamic Studies Library: <a href='https://www.mcgill.ca/library/branches/islamic'>Islamic Studies Library</a>"], 
+        "context_set": ""
+        },
+        {"tag": "education curriculum", 
+        "patterns": ["Education Curriculum Resources Centre"], 
+        "responses": ["Click on this link to access more information about Education Curriculum Resources Centre: <a href='https://www.mcgill.ca/library/branches/education'>Education Curriculum Resources Centre</a>"], 
+        "context_set": ""
+        },
+        {"tag": "macdonald", 
+        "patterns": ["Macdonald Campus Library", "Macdonald Library"], 
+        "responses": ["Click on this link to access more information about Macdonald Campus Library: <a href='https://www.mcgill.ca/library/branches/macdonald'>Macdonald Campus Library</a>"], 
+        "context_set": ""
+        },
+        {"tag": "marvin duchow",
+        "patterns": ["Marvin Duchow Music Library", "Music Library", "Marvin Duchow"],
+        "responses": ["Click on this link to access more information about Marvin Duchow Music Library: <a href='https://www.mcgill.ca/library/branches/music'>Marvin Duchow Music Library</a>"],
+        "context_set": ""
+        },
+        {"tag": "nahum gelber",
+        "patterns": ["Nahum Gelber Law Library", "Law Library", "Nahum Gelber"],
+        "responses": [ "Click on this link to access more information about Nahum Gelber Law Library: <a href='https://www.mcgill.ca/library/branches/law'>Nahum Gelber Law Library</a>"],
+        "context_set": ""
+        },
+        {"tag": "osler",
+        "patterns": ["Osler Library of the History of Medicine", "Osler", "Osler Library"],
+        "responses": [ "Click on this link to access more information about Osler Library of the History of Medicine: <a href='https://www.mcgill.ca/library/branches/osler'>Osler Library of the History of Medicine</a>"],
+        "context_set": ""
+        },
+        {"tag": "ROAAr",
+        "patterns": ["ROAAr Reading Room", "Rare Books and Special Collections"],
+        "responses": [ "Click on this link to access more information about ROAAr Reading Room: <a href='https://www.mcgill.ca/library/branches/roaar/roaar-reading-room'>ROAAr Reading Room</a>"],
+        "context_set": ""
+        },
         {"tag": "club",
-        "patterns": ["clubs?", "student groups?"],
+        "patterns": ["clubs?", "student groups?", "activities", "student couuncils"],
         "responses": ["Here is a link to the list of clubs: <a href='https://ssmu.ca/student-life/clubs-services-isg/'>Clubs, Services and ISGs</a>"],
         "context_set": ""
         }
         ]
 }
-
-
-
-
-
