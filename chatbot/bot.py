@@ -5,9 +5,10 @@ import torch
 import numpy as np
 import random as rd
 from model import NN
-from nltk_utils import bag_of_words, tokenize, lemmatize
+from utils import bag_of_words, tokenize, lemmatize
 
 
+# activate cuda
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 intents = json.loads(open('/Users/nick/Desktop/Codejam/ChatbotMcGIll/chatbot/intents.json').read())
 
@@ -37,27 +38,24 @@ def rand_response():
         "I do not understand...",
         "Beg your pardon?"
     ]
-
-    rand_item = rd.randrange(len(rand_list))
-    return rand_list[rand_item]
+    return rand_list[rd.randrange(len(rand_list))]
 
 
 bot_name = "N.A.A.S"
 
 # helper that retrieves and process message from user
 def get_response(msg):
-    sentence = tokenize(msg)
-    X = bag_of_words(sentence, all_words)
+    tk_sentence = tokenize(msg)
+    X = bag_of_words(tk_sentence, all_words)
     X = X.reshape(1, X.shape[0])
     X = torch.from_numpy(X).to(device)
 
-    output = model(X)
-    _, predicted = torch.max(output, dim=1)
-
-    tag = classes[predicted.item()]
-
-    probs = torch.softmax(output, dim=1)
-    prob = probs[0][predicted.item()]
+    y_pred = model(X)
+    # retrieve the highest prediction
+    _, predicted_idx = torch.max(y_pred, dim=1)
+    tag = classes[predicted_idx.item()]
+    probs = torch.softmax(y_pred, dim=1)
+    prob = probs[0][predicted_idx.item()]
     if prob.item() > 0.75:
         for intent in intents['intents']:
             if tag == intent["tag"]:

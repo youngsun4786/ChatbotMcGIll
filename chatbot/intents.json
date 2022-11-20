@@ -10,7 +10,7 @@
         "context_set": ""
         },
         {"tag": "cafe",
-         "patterns": ["feeling tired","coffee", "coffee shop", "cafe", "drink", "thirsty", "need to be caffeinated", "chill study spot", "chill study space"],
+         "patterns": ["feeling tired","coffee", "coffee shop", "cafe", "drink", "thirsty", "need to be caffeinated", "quiet study spot", "chill study space"],
          "responses": ["Name: <a href='http://www.leaveshouse.com/'>LEAVES HOUSE</a> Location: 1800 Avenue McGill College RDC-A", 
          "Name: <a href='https://www.facebook.com/MiltonBcafeteriaurbaine/'></a> Milton B - Cafétéria urbaine Location: 3498 Park Ave", 
          "Name: <a href='http://shop.humblelion.com/'>Café Humble Lion (McGill College)</a> Location: 1204 McGill College Ave", 
@@ -33,7 +33,7 @@
          "context_set": ""
         },
         {"tag": "mental health",
-        "patterns": ["mental health?", "wellness", "support group", "counselling", "mental illness"],
+        "patterns": ["Where can I find ask for help?", "wellness", "support group", "counselling", "mental illness"],
         "responses": ["Click on this website to access mental health resources: <a href='https://myssp.app/ca/home'>My SSP</a>", 
         "Click on this link to access mental health resources: <a href='https://www.mcgill.ca/hr/benefits/health-well-being/resources/mental-health'>Mental Health | Human Resources</a>", 
         "Click on this link to access mental health resources: <a href='https://ssmu.ca/resources/mental-health/'>Mental Health - SSMU</a>", 
@@ -44,12 +44,12 @@
         "context_set": ""
         },
         {"tag": "advising",
-        "patterns": ["advising?", "advisor", "discuss course", "faculty advisor"],
+        "patterns": ["advising?", "advisor", "discuss course", "faculty advisor", "course advising", "post graduation", "consult"],
         "responses": ["Here is a link to the advisor directory: <a href='https://www.mcgill.ca/students/advising/advisordirectory]'>Advisor Directory</a>"],
         "context_set": ""
         },   
         {"tag": "library",
-        "patterns": ["library", "books", "textbooks", "quiet study space"],
+        "patterns": ["help me locate the nearest library", "where can I find all libraries?", "what are opening hours for libraries?", "library", "books", "textbooks", "quiet study space"],
         "responses": ["Here is a link to all the McGill libraries: <a href='https://www.mcgill.ca/library/branches'>McGill Libraries</a>"],
         "context_set": ""
         }, 
@@ -69,7 +69,7 @@
         "context_set": ""
         },
         {"tag": "islamic studies", 
-        "patterns": ["Islamic Studies Library", "Islamic", "Islamic Stdudies"], 
+        "patterns": ["Islamic Studies Library", "Islamic", "Islamic Studies"], 
         "responses": ["Click on this link to access more information about Islamic Studies Library: <a href='https://www.mcgill.ca/library/branches/islamic'>Islamic Studies Library</a>"], 
         "context_set": ""
         },
@@ -94,7 +94,7 @@
         "context_set": ""
         },
         {"tag": "osler",
-        "patterns": ["Osler Library of the History of Medicine", "Osler", "Osler Library"],
+        "patterns": ["Osler Library of the History of Medicine", "Osler", "Osler Library", "medical textbooks"],
         "responses": [ "Click on this link to access more information about Osler Library of the History of Medicine: <a href='https://www.mcgill.ca/library/branches/osler'>Osler Library of the History of Medicine</a>"],
         "context_set": ""
         },
@@ -104,7 +104,7 @@
         "context_set": ""
         },
         {"tag": "club",
-        "patterns": ["clubs?", "student groups?", "activities", "student couuncils"],
+        "patterns": ["what are the listing for clubs?", "clubs?", "student groups?", "activities", "student councils", "clubs related to major"],
         "responses": ["Here is a link to the list of clubs: <a href='https://ssmu.ca/student-life/clubs-services-isg/'>Clubs, Services and ISGs</a>"],
         "context_set": ""
         }

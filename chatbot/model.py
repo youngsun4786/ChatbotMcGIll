@@ -8,7 +8,6 @@ class NN(nn.Module):
         self.l2 = nn.Linear(hidden_size, hidden_size) #2nd (hidden layer) - maps hidden -> hidden
         self.l3 = nn.Linear(hidden_size, num_classes) #3rd (output layer) - maps hidden -> output 
         self.relu = nn.ReLU() # primary activation function relU
-        self.relu = nn.ReLU()
     
     # take bag of words 
     # relu - adds complexity to the forward propagation
